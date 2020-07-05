@@ -92,7 +92,7 @@ public class MavenWrapperDownloader {
             System.exit(0);
         } catch (Throwable e) {
             System.out.println("- Error downloading");
-            e.printStackTrace();
+            log.error(e);
             System.exit(1);
         }
     }

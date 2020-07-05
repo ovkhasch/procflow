@@ -3,7 +3,6 @@ package org.procflow;
 import io.micronaut.configuration.picocli.PicocliRunner;
 
 import org.procflow.engine.ProcessExecutor;
-import org.procflow.model.ProcessInstance;
 import org.procflow.service.ProcessService;
 import picocli.CommandLine.Command;
 import picocli.CommandLine.Option;
@@ -30,8 +29,6 @@ public class Application implements Runnable {
 
     @Inject
     ProcessService processService;
-    @Inject
-    ProcessExecutor processExecutor;
 
     public static void main(String[] args) throws Exception {
         PicocliRunner.run(Application.class, args);
@@ -44,13 +41,12 @@ public class Application implements Runnable {
         System.out.println("Output file: " + outputFileName);
         System.out.println("Actions directory: " + actionsDir);
 
-        var processInstance = processService.getProcessInstance(
+        processService.runProcess(
                 processFileName,
                 inputFileName,
                 actionsDir,
                 outputFileName
         );
-        processExecutor.run(processInstance);
     }
 
 }

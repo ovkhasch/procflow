@@ -50,7 +50,7 @@ public class StepExecutor {
                 }
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            log.error("Unable to read action definition from " + path, e);
         }
     }
 }
