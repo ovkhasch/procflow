@@ -9,6 +9,9 @@ import picocli.CommandLine.Option;
 
 import javax.inject.Inject;
 
+/**
+ * CLI application entry point with options processing capability
+ */
 @Command(name = "procflow",
         description = "Procflow takes steps from a process definition " +
                 "(from a process YAML file) and executes them sequentially, " +
@@ -36,6 +39,8 @@ public class Application implements Runnable {
 
     @Override
     public void run() {
+        // Application main entry point is here
+
         System.out.println("Process definition: " + processFileName);
         System.out.println("Input data: " + inputFileName);
         System.out.println("Output file: " + outputFileName);
@@ -48,5 +53,4 @@ public class Application implements Runnable {
                 outputFileName
         );
     }
-
 }

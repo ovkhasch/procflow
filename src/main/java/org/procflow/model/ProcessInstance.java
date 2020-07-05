@@ -1,5 +1,8 @@
 package org.procflow.model;
 
+/**
+ * Process instance is a process definition, context and parameters required to run a process
+ */
 public class ProcessInstance {
     private ProcessDefinition process;
     private ProcessContext context;

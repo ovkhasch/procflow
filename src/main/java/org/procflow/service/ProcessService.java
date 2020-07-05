@@ -15,6 +15,9 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Map;
 
+/**
+ * Handle I/O for the process definition/data files, provides interface for running a process using CLI
+ */
 @Singleton
 public class ProcessService {
     private static final Logger log = LoggerFactory.getLogger(ProcessService.class);

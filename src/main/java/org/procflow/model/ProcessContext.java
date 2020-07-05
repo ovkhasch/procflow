@@ -3,6 +3,9 @@ package org.procflow.model;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Process instance data context
+ */
 public class ProcessContext {
     private Map<String, Object> input = new HashMap<>();
     private Map<String, Object> result = new HashMap<>();

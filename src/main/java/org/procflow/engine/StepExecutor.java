@@ -22,9 +22,12 @@ public class StepExecutor {
         String languageId = step.getLanguage().name();
         step.getParameters().forEach(p -> {
             if (p.getRef() != null) {
+                // when parameter is a ref we prefix it with pf_ (to avoid naming conflicts),
+                // evaluate to resolve the ref and add to the execution context
                 Value val = context.eval(languageId, "pf_" + p.getRef());
                 context.getBindings(languageId).putMember(p.getName(), val);
             } else {
+                // when parameter is a val - just adding the value to the execution context
                 context.getBindings(languageId).putMember(p.getName(), p.getVal());
             }
         });
@@ -33,19 +36,32 @@ public class StepExecutor {
     public void run(Step step, ProcessInstance processInstance) {
         log.info("Starting step: " + step.getName());
 
+        // base dir + action name + language-specific extension
         var path = processInstance.getActionsDir() + "/" +
                 step.getAction() + "." +
                 step.getLanguage().getExtension();
+
         try {
+            // load action code
             var action = Files.readString(new File(path).toPath(), StandardCharsets.UTF_8);
+
+            // create execution context
             try (Context context = Context.newBuilder().allowAllAccess(true).build()) {
                 String languageId = step.getLanguage().name();
                 Value bindings = context.getBindings(languageId);
+
+                // add input/result bindings to the execution context
                 bindings.putMember("pf_input", ProxyObject.fromMap(processInstance.getContext().getInput()));
                 bindings.putMember("pf_result",ProxyObject.fromMap(processInstance.getContext().getResult()));
+
+                // add declared parameters to the execution context
                 processParameters(step, context);
+
+                // run an action
                 Value eval = context.eval(languageId, action);
+
                 if (!eval.isNull()) {
+                    // save action result to the process context
                     processInstance.getContext().getResult().put(step.getName(), eval.as(Object.class));
                 }
             }
