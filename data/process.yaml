@@ -13,30 +13,30 @@ steps:
     action: pow
     parameters:
       - name: base
-        value: $input.x
+        ref: input.x
       - name: exponent
         value: 2
   - name: axx
     action: multiply
     parameters:
       - name: arg1
-        value: $input.a
+        ref: input.a
       - name: arg2
-        value: $result.xx
+        ref: result.xx
   - name: bx
     action: multiply
     parameters:
       - name: arg1
-        value: $input.b
+        ref: input.b
       - name: arg2
-        value: $input.x
+        ref: input.x
   - name: axx_plus_bx
     action: sum
     parameters:
       - name: arg1
-        value: $result.axx
+        ref: result.axx
       - name: arg2
-        value: $result.bx
+        ref: result.bx
 ###################################################
   - name: dump2
     action: dump
@@ -44,4 +44,4 @@ steps:
     action: printEval
     parameters:
       - name: str
-        value: "`Calculation finished, result is ${$result.axx_plus_bx}`"
+        value: "`Calculation finished, result is ${pf_result.axx_plus_bx}`"

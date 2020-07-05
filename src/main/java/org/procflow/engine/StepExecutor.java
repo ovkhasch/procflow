@@ -21,8 +21,8 @@ public class StepExecutor {
     private void processParameters(Step step, Context context) {
         String languageId = step.getLanguage().name();
         step.getParameters().forEach(p -> {
-            if (p.getValue().startsWith("$")) {
-                String assignment = p.getName() + " = " + p.getValue() + ";";
+            if (p.getRef() != null) {
+                String assignment = p.getName() + " = pf_" + p.getRef();
                 context.eval(languageId, assignment);
             } else {
                 context.getBindings(languageId).putMember(p.getName(), p.getValue());
@@ -41,15 +41,14 @@ public class StepExecutor {
             try (Context context = Context.newBuilder().allowAllAccess(true).build()) {
                 String languageId = step.getLanguage().name();
                 Value bindings = context.getBindings(languageId);
-                bindings.putMember("$input", ProxyObject.fromMap(processInstance.getContext().getInput()));
-                bindings.putMember("$result",ProxyObject.fromMap(processInstance.getContext().getResult()));
+                bindings.putMember("pf_input", ProxyObject.fromMap(processInstance.getContext().getInput()));
+                bindings.putMember("pf_result",ProxyObject.fromMap(processInstance.getContext().getResult()));
                 processParameters(step, context);
                 Value eval = context.eval(languageId, action);
                 if (!eval.isNull()) {
                     processInstance.getContext().getResult().put(step.getName(), eval.as(Object.class));
                 }
             }
-
         } catch (IOException e) {
             e.printStackTrace();
         }

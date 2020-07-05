@@ -5,8 +5,8 @@ steps:
     language: python
     parameters:
       - name: arg1
-        value: $input.a
+        ref: input.a
       - name: arg2
-        value: $input.b
+        ref: input.b
   - name: dump
     action: dump

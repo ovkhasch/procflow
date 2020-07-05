@@ -1,2 +1,2 @@
-print(JSON.stringify($input));
-print(JSON.stringify($result));
+print(JSON.stringify(pf_input));
+print(JSON.stringify(pf_result));
