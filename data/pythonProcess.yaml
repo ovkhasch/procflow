@@ -1,0 +1,12 @@
+name: Calculate a+b
+steps:
+  - name: a_plus_b
+    action: sum
+    language: python
+    parameters:
+      - name: arg1
+        value: $input.a
+      - name: arg2
+        value: $input.b
+  - name: dump
+    action: dump

@@ -1,0 +1,4 @@
+name: Minimal js process
+steps:
+  - name: hello
+    action: hello

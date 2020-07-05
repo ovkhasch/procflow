@@ -1,0 +1,47 @@
+name: Calculate axx+bx
+steps:
+###################################################
+  - name: print_start
+    action: print
+    parameters:
+      - name: str
+        value: Starting the calculation process...
+  - name: dump1
+    action: dump
+###################################################
+  - name: xx
+    action: pow
+    parameters:
+      - name: base
+        value: $input.x
+      - name: exponent
+        value: 2
+  - name: axx
+    action: multiply
+    parameters:
+      - name: arg1
+        value: $input.a
+      - name: arg2
+        value: $result.xx
+  - name: bx
+    action: multiply
+    parameters:
+      - name: arg1
+        value: $input.b
+      - name: arg2
+        value: $input.x
+  - name: axx_plus_bx
+    action: sum
+    parameters:
+      - name: arg1
+        value: $result.axx
+      - name: arg2
+        value: $result.bx
+###################################################
+  - name: dump2
+    action: dump
+  - name: print_end
+    action: printEval
+    parameters:
+      - name: str
+        value: "`Calculation finished, result is ${$result.axx_plus_bx}`"
