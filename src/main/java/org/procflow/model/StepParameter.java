@@ -2,7 +2,7 @@ package org.procflow.model;
 
 public class StepParameter {
     private String name;
-    private String val;
+    private Object val;
     private String ref;
 
     public String getName() {
@@ -13,11 +13,11 @@ public class StepParameter {
         this.name = name;
     }
 
-    public String getVal() {
+    public Object getVal() {
         return val;
     }
 
-    public void setVal(String val) {
+    public void setVal(Object val) {
         this.val = val;
     }
 

@@ -18,4 +18,4 @@ steps: # list of process steps
     parameters:
       - name: str
         # input and result are available as pf_input and pf_result variables inside action code
-        ref: "`Result is: ${pf_result.a_plus_42}`"
+        val: "`Result is: ${pf_result.a_plus_42}`"
