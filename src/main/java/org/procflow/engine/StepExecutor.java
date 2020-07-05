@@ -22,8 +22,8 @@ public class StepExecutor {
         String languageId = step.getLanguage().name();
         step.getParameters().forEach(p -> {
             if (p.getRef() != null) {
-                String assignment = p.getName() + " = pf_" + p.getRef();
-                context.eval(languageId, assignment);
+                Value val = context.eval(languageId, "pf_" + p.getRef());
+                context.getBindings(languageId).putMember(p.getName(), val);
             } else {
                 context.getBindings(languageId).putMember(p.getName(), p.getValue());
             }
