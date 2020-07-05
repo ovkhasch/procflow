@@ -1,6 +1,6 @@
 name: Calculate a+b # process name
 steps: # list of process steps
-  - name: a_plus_42 # step name - also used as name for a step result var
+  - name: a_plus_42 # step name - also used as a name for a step result var
     action: sum # a name of the action (implementation file)
     language: python # action language (default javascript)
     parameters: # list of action parameters

@@ -25,7 +25,7 @@ public class StepExecutor {
                 Value val = context.eval(languageId, "pf_" + p.getRef());
                 context.getBindings(languageId).putMember(p.getName(), val);
             } else {
-                context.getBindings(languageId).putMember(p.getName(), p.getValue());
+                context.getBindings(languageId).putMember(p.getName(), p.getVal());
             }
         });
     }

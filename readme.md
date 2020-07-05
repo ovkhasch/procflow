@@ -3,7 +3,7 @@ Disclaimer: as of now procflow is not a production-ready framework. It was writt
 
 Procflow takes steps from a process definition (from a process YAML file) and executes them sequentially, using a provided input (from an input YAML file) as a data context. It is writing output of each step into the data context as well. Process steps can access and modify data context during execution. The final context state is written into an output file.
 
-Procflow is intended to sequence lightweight actions as process steps. An important advantage is that actions can be implemented in any language, supported by polyglot GraalVM. It is possible to mix actions implemented with multiple languages in a single process definition. Implementing new actions is as simple as adding drop-in code files.  
+Procflow is intended to sequence lightweight actions as process steps. An important advantage is that actions can be implemented in any language, supported by polyglot [GraalVM](https://www.graalvm.org/). It is possible to mix actions implemented with multiple languages in a single process definition. Implementing new actions is as simple as adding drop-in code files.  
 
 Procflow can also be run on a stock JVM (starting from Java 11), in this case the only supported language for actions is javascript.
 
@@ -43,7 +43,7 @@ Process definitions (as well as input and output files) have [YAML](https://yaml
 ```yaml
 name: Calculate a+b # process name
 steps: # list of process steps
-  - name: a_plus_42 # step name - also used as name for a step result var
+  - name: a_plus_42 # step name - also used as a name for a step result var
     action: sum # a name of the action (implementation file)
     language: python # action language (default javascript)
     parameters: # list of action parameters 

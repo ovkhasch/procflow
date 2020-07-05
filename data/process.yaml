@@ -5,7 +5,7 @@ steps:
     action: print
     parameters:
       - name: str
-        value: Starting the calculation process...
+        val: Starting the calculation process...
   - name: dump1
     action: dump
 ###################################################
@@ -15,7 +15,7 @@ steps:
       - name: base
         ref: input.x
       - name: exponent
-        value: 2
+        val: 2
   - name: axx
     action: multiply
     parameters:
@@ -44,4 +44,4 @@ steps:
     action: printEval
     parameters:
       - name: str
-        value: "`Calculation finished, result is ${pf_result.axx_plus_bx}`"
+        val: "`Calculation finished, result is ${pf_result.axx_plus_bx}`"
