@@ -1,6 +1,6 @@
 package org.procflow.engine;
 
-import org.procflow.model.ProcessInstance;
+import org.procflow.processinstance.ProcessInstance;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -18,5 +18,7 @@ public class ProcessExecutor {
         log.info("Executing process: " + instance.getProcess().getName());
         instance.getProcess().getSteps()
                 .forEach(s -> stepExecutor.run(s, instance));
+
+        instance.getProcessContextMapper().save(instance.getContext());
     }
 }

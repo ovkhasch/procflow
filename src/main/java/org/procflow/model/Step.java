@@ -8,6 +8,7 @@ public class Step {
     private Language language = Language.js;
     private String action;
     private List<StepParameter> parameters = new ArrayList<>();
+    private String output;
 
     public String getName() {
         return name;
@@ -39,5 +40,13 @@ public class Step {
 
     public void setParameters(List<StepParameter> parameters) {
         this.parameters = parameters;
+    }
+
+    public String getOutput() {
+        return output;
+    }
+
+    public void setOutput(String output) {
+        this.output = output;
     }
 }

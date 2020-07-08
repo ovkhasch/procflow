@@ -1,4 +1,8 @@
-package org.procflow.model;
+package org.procflow.processinstance;
+
+import org.procflow.mapper.ProcessContextMapper;
+import org.procflow.model.ProcessContext;
+import org.procflow.model.ProcessDefinition;
 
 /**
  * Process instance is a process definition, context and parameters required to run a process
@@ -6,14 +10,19 @@ package org.procflow.model;
 public class ProcessInstance {
     private ProcessDefinition process;
     private ProcessContext context;
+    private ProcessContextMapper processContextMapper;
     private String actionsDir;
-    private String outputFileName;
 
-    public ProcessInstance(ProcessDefinition process, ProcessContext context, String actionsDir, String outputFileName) {
+    public ProcessInstance(
+            ProcessDefinition process,
+            ProcessContext context,
+            ProcessContextMapper processContextMapper,
+            String actionsDir
+    ) {
         this.process = process;
         this.context = context;
+        this.processContextMapper = processContextMapper;
         this.actionsDir = actionsDir;
-        this.outputFileName = outputFileName;
     }
 
     public ProcessDefinition getProcess() {
@@ -40,11 +49,11 @@ public class ProcessInstance {
         this.actionsDir = actionsDir;
     }
 
-    public String getOutputFileName() {
-        return outputFileName;
+    public ProcessContextMapper getProcessContextMapper() {
+        return processContextMapper;
     }
 
-    public void setOutputFileName(String outputFileName) {
-        this.outputFileName = outputFileName;
+    public void setProcessContextMapper(ProcessContextMapper processContextMapper) {
+        this.processContextMapper = processContextMapper;
     }
 }

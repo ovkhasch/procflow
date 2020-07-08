@@ -1,17 +1,19 @@
 package org.procflow;
 
 import io.micronaut.configuration.picocli.PicocliRunner;
-
 import org.procflow.engine.ProcessExecutor;
-import org.procflow.service.ProcessService;
+import org.procflow.processinstance.ProcessInstance;
 import picocli.CommandLine.Command;
 import picocli.CommandLine.Option;
 
 import javax.inject.Inject;
+import javax.inject.Provider;
+import javax.inject.Singleton;
 
 /**
  * CLI application entry point with options processing capability
  */
+@Singleton
 @Command(name = "procflow",
         description = "Procflow takes steps from a process definition " +
                 "(from a process YAML file) and executes them sequentially, " +
@@ -31,7 +33,9 @@ public class Application implements Runnable {
     String actionsDir;
 
     @Inject
-    ProcessService processService;
+    ProcessExecutor processExecutor;
+    @Inject
+    Provider<ProcessInstance> processInstance;
 
     public static void main(String[] args) throws Exception {
         PicocliRunner.run(Application.class, args);
@@ -46,11 +50,22 @@ public class Application implements Runnable {
         System.out.println("Output file: " + outputFileName);
         System.out.println("Actions directory: " + actionsDir);
 
-        processService.runProcess(
-                processFileName,
-                inputFileName,
-                actionsDir,
-                outputFileName
-        );
+        processExecutor.run(processInstance.get());
+    }
+
+    public String getProcessFileName() {
+        return processFileName;
+    }
+
+    public String getInputFileName() {
+        return inputFileName;
+    }
+
+    public String getOutputFileName() {
+        return outputFileName;
+    }
+
+    public String getActionsDir() {
+        return actionsDir;
     }
 }

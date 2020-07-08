@@ -3,7 +3,7 @@ package org.procflow.engine;
 import org.graalvm.polyglot.Context;
 import org.graalvm.polyglot.Value;
 import org.graalvm.polyglot.proxy.ProxyObject;
-import org.procflow.model.ProcessInstance;
+import org.procflow.processinstance.ProcessInstance;
 import org.procflow.model.Step;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
