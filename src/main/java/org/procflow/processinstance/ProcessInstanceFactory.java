@@ -6,6 +6,9 @@ import org.procflow.Application;
 import org.procflow.mapper.ProcessContextMapper;
 import org.procflow.mapper.ProcessDefinitionMapper;
 
+/**
+ * Provides an ability to inject ProcessInstance
+ */
 @Factory
 public class ProcessInstanceFactory {
     @Bean

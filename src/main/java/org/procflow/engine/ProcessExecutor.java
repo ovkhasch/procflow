@@ -11,8 +11,6 @@ import org.slf4j.LoggerFactory;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
-import java.io.PrintWriter;
-import java.io.StringWriter;
 
 @Singleton
 public class ProcessExecutor {
@@ -24,8 +22,11 @@ public class ProcessExecutor {
     public void run(ProcessInstance instance) {
         log.info("Executing process: " + instance.getProcess().getName());
 
+        // Step handler
         Consumer<Step> onNext = (Step step) -> stepExecutor.run(step, instance);
+        // Process completion handler
         Action onComplete = () -> instance.getProcessContextMapper().save(instance.getContext());
+        // Step error handler
         Consumer<Throwable> onError = (Throwable t) -> {
             log.error("Process error: " + t.getMessage());
 
@@ -37,6 +38,7 @@ public class ProcessExecutor {
             onComplete.run();
         };
 
+        // Process process steps
         instance.getProcess().getSteps().subscribe(onNext, onError, onComplete);
     }
 }

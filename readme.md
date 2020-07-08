@@ -1,7 +1,9 @@
 #### **What is procflow?**
-Disclaimer: as of now procflow is not a production-ready framework. It was written as a very basic exercise, so it is missing proper error handling, conditions, parallel execution and other important features.
+Disclaimer: as of now procflow is not a production-ready framework. It was written as a very basic exercise, so it is missing conditions, parallel execution and other important features.
 
 Procflow takes steps from a process definition (from a process YAML file) and executes them sequentially, using a provided input (from an input YAML file) as a data context. It is writing output of each step into the data context as well. Process steps can access and modify data context during execution. The final context state is written into an output file.
+
+Process steps are loaded lazily from a file during process execution (java rx), so there's no requirement to fit process definition into memory. This allows for a large number of steps.  
 
 Procflow is intended to sequence lightweight actions as process steps. An important advantage is that actions can be implemented in any language, supported by polyglot [GraalVM](https://www.graalvm.org/). It is possible to mix actions implemented with multiple languages in a single process definition. Implementing new actions is as simple as adding drop-in code files.  
 
@@ -56,12 +58,13 @@ steps: # list of process steps
     parameters:  
       - name: str 
         ref: result.a_plus_42 # parameter value from a step result
+    result: final_result # result variable name for this step (default ie step name)
   - name: print_result_tmpl
     action: printEval 
     parameters:
       - name: str 
 # input and result are available as pf_input and pf_result variables inside action code  
-        val: "`Result is: ${pf_result.a_plus_42}`" 
+        val: "`Result is: ${pf_result.final_result}`" 
 ```
 
 #### **Process input**
@@ -74,7 +77,7 @@ x: 2
 #### **Adding process actions**
 Each process action is a program in a separate file, written using any of the available GraalVM languages. It can expect the following variables to be defined in its global scope:
 * `pf_input` - process input map
-* `pf_result` - a map with step results (return values), where key is a step name
+* `pf_result` - a map with step results (return values), where key is a step name (default) or a result variable name from a step definition
 * all the parameters listed in a step definition are passed as global variables to an action scope
 
 A result of an action is evaluated from an action code. In languages such as js, ruby, python it is a value of a last statement in action code. 

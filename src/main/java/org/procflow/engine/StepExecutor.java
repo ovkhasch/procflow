@@ -69,6 +69,7 @@ public class StepExecutor {
             }
         } catch (IOException e) {
             log.error("Unable to read action definition from " + path, e);
+            throw new RuntimeException("Unable to read action definition from " + path, e);
         }
     }
 }
