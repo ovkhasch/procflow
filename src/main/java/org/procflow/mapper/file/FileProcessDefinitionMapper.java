@@ -29,10 +29,13 @@ public class FileProcessDefinitionMapper implements ProcessDefinitionMapper {
     public ProcessDefinition get() {
             ProcessDefinition processDefinition = new ProcessDefinition();
 
+            // Prepare parser and read the process name
+            JsonParser jsonParser = parseProcessMetadata(processDefinition);
+
             // Read the process steps
             // Create buffered reader with backpressure
             final Flowable<Step> steps = Flowable.generate(
-                    () -> parseProcessMetadata(processDefinition),
+                    () -> jsonParser,
                     this::parseOneStep,
                     JsonParser::close);
 

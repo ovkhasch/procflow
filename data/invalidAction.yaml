@@ -1,0 +1,6 @@
+name: Process with an error action
+steps:
+  - name: error
+    action: error
+  - name: hello
+    action: hello

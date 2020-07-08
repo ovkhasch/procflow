@@ -1,0 +1,8 @@
+name: Process with an invalid step
+steps:
+  - name: hello
+    action: hello
+  - name: problem
+    zzz: qqq
+  - name: hello
+    action: hello

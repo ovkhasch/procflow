@@ -50,7 +50,11 @@ public class Application implements Runnable {
         System.out.println("Output file: " + outputFileName);
         System.out.println("Actions directory: " + actionsDir);
 
-        processExecutor.run(processInstance.get());
+        ProcessInstance processInstance = this.processInstance.get();
+        processExecutor.run(processInstance);
+        if (processInstance.getContext().getError() != null) {
+            System.exit(1);
+        }
     }
 
     public String getProcessFileName() {

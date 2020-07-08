@@ -9,6 +9,7 @@ import java.util.Map;
 public class ProcessContext {
     private Map<String, Object> input = new HashMap<>();
     private Map<String, Object> result = new HashMap<>();
+    private ProcessError error;
 
     public Map<String, Object> getInput() {
         return input;
@@ -24,5 +25,13 @@ public class ProcessContext {
 
     public void setResult(Map<String, Object> result) {
         this.result = result;
+    }
+
+    public ProcessError getError() {
+        return error;
+    }
+
+    public void setError(ProcessError error) {
+        this.error = error;
     }
 }

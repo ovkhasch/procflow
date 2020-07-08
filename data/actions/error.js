@@ -1,0 +1,1 @@
+throw 'Error in an action!';
