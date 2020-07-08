@@ -13,6 +13,7 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
+import java.util.Optional;
 
 @Singleton
 public class StepExecutor {
@@ -62,7 +63,8 @@ public class StepExecutor {
 
                 if (!eval.isNull()) {
                     // save action result to the process context
-                    processInstance.getContext().getResult().put(step.getName(), eval.as(Object.class));
+                    var resultVarName = Optional.ofNullable(step.getResult()).orElse(step.getName());
+                    processInstance.getContext().getResult().put(resultVarName, eval.as(Object.class));
                 }
             }
         } catch (IOException e) {

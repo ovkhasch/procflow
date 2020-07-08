@@ -37,6 +37,7 @@ steps:
         ref: result.axx
       - name: arg2
         ref: result.bx
+    result: final_result
 ###################################################
   - name: dump2
     action: dump
