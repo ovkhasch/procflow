@@ -1,11 +1,10 @@
 package org.procflow.model;
 
-import java.util.ArrayList;
-import java.util.List;
+import io.reactivex.Flowable;
 
 public class ProcessDefinition {
     private String name;
-    private List<Step> steps = new ArrayList<>();
+    private Flowable<Step> steps;
 
     public String getName() {
         return name;
@@ -15,11 +14,11 @@ public class ProcessDefinition {
         this.name = name;
     }
 
-    public List<Step> getSteps() {
+    public Flowable<Step> getSteps() {
         return steps;
     }
 
-    public void setSteps(List<Step> steps) {
+    public void setSteps(Flowable<Step> steps) {
         this.steps = steps;
     }
 }

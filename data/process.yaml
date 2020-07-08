@@ -45,4 +45,4 @@ steps:
     action: printEval
     parameters:
       - name: str
-        val: "`Calculation finished, result is ${pf_result.axx_plus_bx}`"
+        val: "`Calculation finished, result is ${pf_result.final_result}`"
